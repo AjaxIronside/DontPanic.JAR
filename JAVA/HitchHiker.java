@@ -25,24 +25,14 @@ public class HitchHiker{
       userInput.setBounds(250, 500, 200, 30);
    
    //The enter button with the listener. This is how inputs are sent to the game.
-      JButton enterButt = new JButton("Enter");
-      enterButt.addActionListener(
-         new ActionListener()
-         {
-            public void actionPerformed(ActionEvent e)
-            {
-               String intake = userInput.getText();
-            }
-         });
    
-      enterButt.setBounds(300, 550, 100, 30);
    
    //Send all these declared elements to a method which constructs the JFrame.
-      createWindow(picDisplay, textLabel, userInput, enterButt, intake);
+      createWindow(picDisplay, textLabel, userInput, intake);
    
    }
 
-   private static void createWindow(JLabel picDisplay, JLabel textLabel, JTextField userInput, JButton enterButt, String intake){
+   private static void createWindow(JLabel picDisplay, JLabel textLabel, JTextField userInput, String intake){
    
    //create and configure the frame
       JFrame frame = new JFrame("The Hitchhiker's Guide To The Galaxy");
@@ -58,6 +48,10 @@ public class HitchHiker{
     //picDisplay.setImage(picture);
    
       textLabel.setText("<html><center>Don't Panic!<br>Welcome to the Hitchhiker's Guide  to the Galaxy  Java remake by Al Such.<br>Type \"start\" to begin, or \"help\" for more info.</html>");
+      
+      JButton enterButt = new JButton("Enter");
+   
+      enterButt.setBounds(300, 550, 100, 30);
    
    
       frame.add(picDisplay);
@@ -67,9 +61,21 @@ public class HitchHiker{
       frame.setLayout(null);
       frame.setVisible(true);
       
-      if (intake == "start"){
-         startScreen(picDisplay, textLabel, userInput, enterButt);
-      }
+      enterButt.addActionListener(
+         new ActionListener()
+         {
+            public void actionPerformed(ActionEvent e)
+            {
+               String intake = userInput.getText();
+               if (intake.equalsIgnoreCase("start")){
+                  startScreen(picDisplay, textLabel, userInput, enterButt);
+               }
+               else {
+                  textLabel.setText("Don't know how to " + intake + " something.");
+               }
+            }
+         });
+      
    
    
    }
