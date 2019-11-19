@@ -48,7 +48,7 @@ public class HitchHiker{
     //picDisplay.setImage(picture);
    
       textLabel.setText("<html><center>Don't Panic!<br>Welcome to the Hitchhiker's Guide  to the Galaxy  Java remake by Al Such.<br>Type \"start\" to begin, or \"help\" for more info.</html>");
-      
+   
       JButton enterButt = new JButton("Enter");
    
       enterButt.setBounds(300, 550, 100, 30);
@@ -60,6 +60,58 @@ public class HitchHiker{
       frame.add(enterButt);
       frame.setLayout(null);
       frame.setVisible(true);
+   
+      enterButt.addActionListener(
+         new ActionListener()
+         {
+            public void actionPerformed(ActionEvent e)
+            {
+               String intake = userInput.getText();
+               if (intake.equalsIgnoreCase("start")){
+                  enterButt.removeActionListener(this);
+                  startScreen(picDisplay, textLabel, userInput, enterButt);
+               }
+               else if (intake.equalsIgnoreCase("help")){
+                  enterButt.removeActionListener(this);
+                  helpPrompt(picDisplay, textLabel, userInput, enterButt);
+               }
+               else {
+                  textLabel.setText("Don't know how to " + intake + " something.");
+               }
+            }
+         });
+   
+   
+   
+   }
+
+   private static void startScreen(JLabel picDisplay, JLabel textLabel, JTextField userInput, JButton enterButt){
+   
+      //New listener prompts
+      
+      enterButt.addActionListener(
+         new ActionListener()
+         {
+            public void actionPerformed(ActionEvent e)
+            {
+               String intake = userInput.getText();
+                  //put stuff here
+                 //  else {
+                  //textLabel.setText("Don't know how to " + intake + " something.");
+               //}
+            }
+         });
+   
+      
+      
+      //New story prompt.
+      textLabel.setText("<html>You wake up. The room is spinning very gently round your head. <br>Or at least it would be if you could see it which you can't.</html>");
+      
+   }
+   
+   private static void helpPrompt(JLabel picDisplay, JLabel textLabel, JTextField userInput, JButton enterButt){
+   
+      //New listener prompts
       
       enterButt.addActionListener(
          new ActionListener()
@@ -68,19 +120,19 @@ public class HitchHiker{
             {
                String intake = userInput.getText();
                if (intake.equalsIgnoreCase("start")){
+                  enterButt.removeActionListener(this);
                   startScreen(picDisplay, textLabel, userInput, enterButt);
-               }
+               }                 
                else {
                   textLabel.setText("Don't know how to " + intake + " something.");
                }
             }
          });
+   
       
-   
-   
-   }
-
-   private static void startScreen(JLabel picDisplay, JLabel textLabel, JTextField userInput, JButton enterButt){
-      textLabel.setText("You've successfully called the first step method!");
+      
+      //New story prompt.
+      textLabel.setText("<html>THE HITCHHIKER'S GUIDE TO THE GALAXY<br>Infocom interactive fiction - a science fiction story<br>Now go ahead and type \"start\".</html>");
+      
    }
 }
